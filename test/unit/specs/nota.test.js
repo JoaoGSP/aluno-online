@@ -1,35 +1,34 @@
-const Nota = require('../src/models/nota');
+const Nota = require("../src/models/nota");
 
-describe('Calculo da média final', () => {
-    test('a media é zero se não tem notas', () => {
-        let nota = new Nota(null, 0, 0, 0);
-        expect(nota.mediaFinal()).toEqual(0);
-        nota = new Nota(null, null, null, null)
-        expect(nota.mediaFinal()).toEqual(0);
-    });
-
-    test('a média é (0.4 * a1) + (0.6 * a2) se tem apenas a1 e a2', () => {
-        let nota = new Nota(null, 3, 5, null);
-        expect(nota.mediaFinal()).toEqual(0.4 * 3 + 0.6 * 5);
-        nota = new Nota(null, 7, 4, null);
-        expect(nota.mediaFinal()).toEqual(0.4 * 7 + 0.6 * 4);
-    });
-
-    test('a média é (0.4 * a3) + (0.6 * a2) se a3 substitui a1', () => {
-        let nota = new Nota(null, 0, 5, 3);
-        expect(nota.mediaFinal()).toEqual(0.4 * 3 + 0.6 * 5);
-        nota = new Nota(null, 2, 5, 3);
-        expect(nota.mediaFinal()).toEqual(0.4 * 3 + 0.6 * 5);
-        nota = new Nota(null, 2, 5, 6);
-        expect(nota.mediaFinal()).toEqual(0.4 * 6 + 0.6 * 5);
-    });
-
-    test('a média é (0.4 * a1) + (0.6 * a3) se a3 substitui a2', () => {
-        let nota = new Nota(null, 6, 0, 5);
-        expect(nota.mediaFinal()).toEqual(0.4 * 6 + 0.6 * 5);
-        nota = new Nota(null, 6, 4, 5);
-        expect(nota.mediaFinal()).toEqual(0.4 * 6 + 0.6 * 5);
-        nota = new Nota(null, 6, 4, 7);
-        expect(nota.mediaFinal()).toEqual(0.4 * 6 + 0.6 * 7);
-    });
+describe("Verificar a menção final", () => {
+  test("O valor recebido corresponde a menção: II - Inferior?", () => {
+    let calcular = new Nota  
+    let notaFinal = 0.2 
+    expect(calcular.mediaCA(notaFinal)).toMatch("II - Inferior")
+  });
+  test("O valor recebido corresponde a menção: MI - Média Inferior?", () => {
+    let calcular = new Nota  
+    let notaFinal = 4
+    expect(calcular.mediaCA(notaFinal)).toMatch("MI- Média Inferior")
+  });
+  test("O valor recebido corresponde a menção: MM - Média minima?", () => {
+    let calcular = new Nota  
+    let notaFinal = 6 
+    expect(calcular.mediaCA(notaFinal)).toMatch("MM - Média minima")
+  });
+  test("O valor recebido corresponde a menção: MS- Média Superior?", () => {
+    let calcular = new Nota  
+    let notaFinal = 7 
+    expect(calcular.mediaCA(notaFinal)).toMatch("MS- Média Superior")
+  });
+  test("O valor recebido corresponde a menção: SS – Superior?", () => {
+    let calcular = new Nota  
+    let notaFinal = 10 
+    expect(calcular.mediaCA(notaFinal)).toMatch("SS – Superior")
+  });
+  test("O valor recebido é um número inválido?", () => {
+    let calcular = new Nota  
+    let notaFinal = -10 
+    expect(calcular.mediaCA(notaFinal)).toMatch("Nota inválida")
+  });
 });
